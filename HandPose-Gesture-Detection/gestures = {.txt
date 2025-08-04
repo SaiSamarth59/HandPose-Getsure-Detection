@@ -1,0 +1,38 @@
+gestures = {
+    "Open Palm": lambda landmarks: all(landmarks[i].y < landmarks[i-2].y for i in range(8, 21, 4)),
+    "Fist": lambda landmarks: all(landmarks[i].y > landmarks[i-2].y for i in range(8, 21, 4)),
+    "Thumbs Up": lambda landmarks: landmarks[4].y < landmarks[3].y < landmarks[2].y < landmarks[1].y < landmarks[0].y,
+    "Thumbs Down": lambda landmarks: landmarks[4].y > landmarks[3].y > landmarks[2].y > landmarks[1].y > landmarks[0].y,
+    "Victory Sign": lambda landmarks: landmarks[8].y < landmarks[6].y and landmarks[12].y < landmarks[10].y and landmarks[16].y > landmarks[14].y,
+    "OK Sign": lambda landmarks: abs(landmarks[4].x - landmarks[8].x) < 0.05 and abs(landmarks[4].y - landmarks[8].y) < 0.05,
+    "Pointing Up": lambda landmarks: landmarks[8].y < landmarks[6].y and all(landmarks[i].y > landmarks[i-2].y for i in [12, 16, 20]),
+    "Pointing Left": lambda landmarks: landmarks[8].x < landmarks[6].x and all(landmarks[i].x > landmarks[i-2].x for i in [12, 16, 20]),
+    "Rock Sign": lambda landmarks: landmarks[4].y < landmarks[3].y and landmarks[8].y < landmarks[6].y and landmarks[20].y < landmarks[18].y,
+    "Call Me": lambda landmarks: abs(landmarks[4].y - landmarks[20].y) < 0.1 and landmarks[8].y > landmarks[6].y
+}
+
+
+
+
+"Peace Sign": lambda lm: lm[8].y < lm[6].y and lm[12].y < lm[10].y and all(lm[i].y > lm[i-2].y for i in [16, 20]),
+    "Stop": lambda lm: all(lm[i].y < lm[i-2].y for i in [8, 12, 16, 20]) and lm[4].y > lm[3].y,
+    "Finger Gun": lambda lm: lm[8].y < lm[6].y and lm[12].y > lm[10].y and lm[4].x < lm[3].x,
+    "Shaka": lambda lm: lm[4].y < lm[3].y and lm[20].y < lm[18].y and all(lm[i].y > lm[i-2].y for i in [8, 12, 16]),
+    "One Finger Point": lambda lm: lm[8].y < lm[6].y and all(lm[i].y > lm[i-2].y for i in [12, 16, 20]),
+    "Two Fingers Up": lambda lm: lm[8].y < lm[6].y and lm[12].y < lm[10].y and all(lm[i].y > lm[i-2].y for i in [16, 20]),
+    "Three Fingers": lambda lm: all(lm[i].y < lm[i-2].y for i in [8, 12, 16]) and lm[20].y > lm[18].y,
+    "Four Fingers": lambda lm: all(lm[i].y < lm[i-2].y for i in [8, 12, 16, 20]) and lm[4].y > lm[3].y,
+    "Claw": lambda lm: all(lm[i].y > lm[i-2].y for i in [8, 12, 16, 20]) and lm[4].y < lm[3].y,
+    "Palm Side": lambda lm: all(lm[i].x < lm[0].x for i in [4, 8, 12, 16, 20]) or all(lm[i].x > lm[0].x for i in [4, 8, 12, 16, 20]),
+}
+New Gesture Explanations
+Peace Sign: Index and middle fingers up, other fingers down.
+Stop: Open hand with thumb inward.
+Finger Gun: Index finger pointing up, thumb extended, others closed.
+Shaka: Thumb and pinky extended, others closed (Hawaiian gesture).
+One Finger Point: Only index finger extended.
+Two Fingers Up: Index and middle fingers up, others down.
+Three Fingers: Index, middle, and ring fingers up, pinky down.
+Four Fingers: All fingers except thumb extended.
+Claw: All fingers slightly bent as if gripping.
+Palm Side: Palm facing side, all fingers pointing in one x-direction.
